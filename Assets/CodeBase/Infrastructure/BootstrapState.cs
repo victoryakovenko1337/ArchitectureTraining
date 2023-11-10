@@ -5,17 +5,23 @@ namespace CodeBase.Infrastructure
 {
     public class BootstrapState : IState
     {
-        private GameStateMachine _stateMachine;
+        private const string Initial = "Initial";
+        private readonly GameStateMachine _stateMachine;
+        private readonly SceneLoader _sceneLoader;
 
-        public BootstrapState(GameStateMachine stateMachine)
+        public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader)
         {
             _stateMachine = stateMachine;
+            _sceneLoader = sceneLoader;
         }
 
         public void Enter()
         {
             RegisterServices();
+            _sceneLoader.Load(Initial, EnterLoadLevel);
         }
+
+        private void EnterLoadLevel() => _stateMachine.Enter<LoadLevelState, string>("Main");
 
         public void Exit()
         {
@@ -29,7 +35,7 @@ namespace CodeBase.Infrastructure
 
         private static IInputService RegisterInputService()
         {
-            if (Application.isEditor)
+            if(Application.isEditor)
             {
                 return new StandaloneInputService();
             }
