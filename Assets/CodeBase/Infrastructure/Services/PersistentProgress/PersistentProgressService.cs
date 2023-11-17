@@ -1,6 +1,6 @@
 ﻿using CodeBase.Data;
 
-namespace CodeBase.Services.PersistentProgress
+namespace CodeBase.Infrastructure.Services.PersistentProgress
 {
     public class PersistentProgressService : IPersistentProgressService
     {

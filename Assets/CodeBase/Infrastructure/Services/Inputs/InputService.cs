@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CodeBase.Services.Input
+namespace CodeBase.Infrastructure.Services.Inputs
 {
     public abstract class InputService : IInputService
     {
@@ -11,8 +11,8 @@ namespace CodeBase.Services.Input
         public abstract Vector2 Axis { get; }
 
         public bool IsAttackButtonUp() => SimpleInput.GetButtonUp(Button);
-        
-        protected static Vector2 SimpleInputAxis() => 
+
+        protected static Vector2 SimpleInputAxis() =>
             new Vector2(SimpleInput.GetAxis(Horizontal), SimpleInput.GetAxis(Vertical));
     }
 }

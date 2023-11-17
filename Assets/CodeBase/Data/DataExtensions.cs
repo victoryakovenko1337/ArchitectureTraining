@@ -1,7 +1,6 @@
-﻿using CodeBase.Data;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets.CodeBase.Data
+namespace CodeBase.Data
 {
     public static class DataExtensions
     {
@@ -10,5 +9,8 @@ namespace Assets.CodeBase.Data
 
         public static Vector3 AsUnityVector(this Vector3Data vector) =>
             new Vector3(vector.X, vector.Y, vector.Z);
+
+        public static T ToDeserialized<T>(this string json) =>
+            JsonUtility.FromJson<T>(json);
     }
 }
