@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-namespace Assets.CodeBase.Enemy
+namespace CodeBase.Enemy
 {
     public class EnemyAnimator : MonoBehaviour
     {

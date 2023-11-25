@@ -2,7 +2,7 @@
 using CodeBase.Infrastructure.Services.SaveLoad;
 using UnityEngine;
 
-namespace Assets.CodeBase.Logic
+namespace CodeBase.Logic
 {
     public class SaveTrigger : MonoBehaviour
     {
