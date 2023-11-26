@@ -350,7 +350,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9021967679106900960, guid: 702f7b88f5e84574a977785296a8c8f1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9021967679106900960, guid: 702f7b88f5e84574a977785296a8c8f1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -891,7 +891,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _followingObject: {fileID: 0}
   _rotationAngleX: 55
-  _distance: 5
+  _distance: 8
   _offsetY: 0.5
 --- !u!4 &979818887 stripped
 Transform:
