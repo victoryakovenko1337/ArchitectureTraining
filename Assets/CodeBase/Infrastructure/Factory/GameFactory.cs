@@ -2,6 +2,7 @@ using CodeBase.Enemy;
 using CodeBase.Infrastructure.AssetManagment;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
+using CodeBase.Infrastructure.Services.Randomizer;
 using CodeBase.Logic;
 using CodeBase.StaticData;
 using CodeBase.UI;
@@ -16,16 +17,18 @@ namespace CodeBase.Infrastructure.Factory
     {
         private readonly IAssets _assets;
         private readonly IStaticDataService _staticData;
+        private readonly IRandomService _randomService;
 
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
 
         private GameObject HeroGameObject { get; set;  }
 
-        public GameFactory(IAssets assets, IStaticDataService staticData)
+        public GameFactory(IAssets assets, IStaticDataService staticData, IRandomService random)
         {
             _assets = assets;
             _staticData = staticData;
+            _randomService = random;
         }
 
         public GameObject CreateHero(GameObject at)
@@ -49,6 +52,10 @@ namespace CodeBase.Infrastructure.Factory
             monster.GetComponent<AgentMoveToPlayer>().Construct(HeroGameObject.transform);
             monster.GetComponent<NavMeshAgent>().speed = monsterData.MoveSpeed;
 
+            LootSpawner lootSpawner = monster.GetComponentInChildren<LootSpawner>();
+            lootSpawner.SetLoot(monsterData.MinLoot, monsterData.MaxLoot);
+            lootSpawner.Construct(this, _randomService);
+
             var attack = monster.GetComponent<Attack>();
             attack.Construct(HeroGameObject.transform);
             attack.Damage = monsterData.Damage;
@@ -60,10 +67,21 @@ namespace CodeBase.Infrastructure.Factory
             return monster;
         }
 
+        public GameObject CreateLoot() =>
+            InstantiateRegistered(AssetPath.Loot);
+
         public void Cleanup()
         {
             ProgressReaders.Clear();
             ProgressWriters.Clear();
+        }
+
+        public void Register(ISavedProgressReader progressReader)
+        {
+            if (progressReader is ISavedProgress progressWriter)
+                ProgressWriters.Add(progressWriter);
+
+            ProgressReaders.Add(progressReader);
         }
 
         private GameObject InstantiateRegistered(string prefabPath, Vector3 at)
@@ -84,14 +102,6 @@ namespace CodeBase.Infrastructure.Factory
         {
             foreach (ISavedProgressReader progressReader in gameObject.GetComponentsInChildren<ISavedProgressReader>())
                 Register(progressReader);            
-        }
-
-        public void Register(ISavedProgressReader progressReader)
-        {
-            if (progressReader is ISavedProgress progressWriter)
-                ProgressWriters.Add(progressWriter);
-
-            ProgressReaders.Add(progressReader);
         }
     }
 }

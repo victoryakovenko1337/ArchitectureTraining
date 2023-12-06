@@ -11,7 +11,8 @@ namespace CodeBase.StaticData
 
         public void LoadMonsters()
         {
-            _monsters = Resources.LoadAll<MonsterStaticData>("StaticData/Monsters")
+            _monsters = Resources
+                .LoadAll<MonsterStaticData>("StaticData/Monsters")
                 .ToDictionary(x => x.MonsterTypeId, x => x);
         }
 
