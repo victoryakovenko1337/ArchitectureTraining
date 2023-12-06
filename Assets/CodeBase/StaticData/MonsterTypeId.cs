@@ -4,5 +4,6 @@ namespace CodeBase.StaticData
     {
         Lich = 0,
         Golem = 10,
+        FatDragon = 100,
     }
 }

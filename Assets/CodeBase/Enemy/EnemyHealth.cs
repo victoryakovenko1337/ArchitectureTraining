@@ -30,8 +30,6 @@ namespace CodeBase.Enemy
         {
             Current -= damage;
 
-            Debug.Log(damage);
-            Debug.Log(Current);
             Animator.PlayHit();
 
             HealthChanged?.Invoke();
