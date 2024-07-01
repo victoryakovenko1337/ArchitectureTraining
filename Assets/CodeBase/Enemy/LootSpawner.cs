@@ -39,6 +39,6 @@ namespace CodeBase.Enemy
             {
                 Value = _random.Next(_lootMin, _lootMax)
             };
-        }        
+        }
     }
 }
