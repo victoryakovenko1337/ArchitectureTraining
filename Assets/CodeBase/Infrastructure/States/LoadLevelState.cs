@@ -3,7 +3,6 @@ using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Logic;
 using CodeBase.UI;
-using System;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.States

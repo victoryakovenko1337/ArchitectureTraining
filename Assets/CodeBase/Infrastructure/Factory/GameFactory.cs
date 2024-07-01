@@ -7,7 +7,6 @@ using CodeBase.Logic;
 using CodeBase.StaticData;
 using CodeBase.UI;
 using System.Collections.Generic;
-using CodeBase.Data;
 using UnityEngine;
 using UnityEngine.AI;
 using Object = UnityEngine.Object;
