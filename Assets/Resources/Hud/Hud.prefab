@@ -81,6 +81,7 @@ GameObject:
   - component: {fileID: 367507143483432765}
   - component: {fileID: 8042722745320321199}
   - component: {fileID: 1695519882279202086}
+  - component: {fileID: 7853887642664286569}
   m_Layer: 5
   m_Name: Hud
   m_TagString: Untagged
@@ -188,6 +189,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HpBar: {fileID: 1889665309233282744}
+--- !u!114 &7853887642664286569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6388780453164756811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7205fea4b96a43bfb9c42e7e9c160698, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LootCounter: {fileID: 12371695799375061}
 --- !u!1 &8072766900617588316
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,6 +700,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13e56631e02590d48aa75fab3a191489, type: 3}
+--- !u!114 &12371695799375061 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7631235298851665572, guid: 13e56631e02590d48aa75fab3a191489, type: 3}
+  m_PrefabInstance: {fileID: 7623586945152426609}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17a4f6bc612452cb3798ef95ac659db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &4143786248443595562 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5786496927067318619, guid: 13e56631e02590d48aa75fab3a191489, type: 3}
