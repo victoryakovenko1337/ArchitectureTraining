@@ -2,6 +2,7 @@ using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.StaticData;
 using System.Collections.Generic;
+using CodeBase.Enemy;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.Factory
@@ -15,7 +16,7 @@ namespace CodeBase.Infrastructure.Factory
 
         GameObject CreateHero(GameObject at);
         GameObject CreateMonster(MonsterTypeId monsterTypeId, Transform parent);
-        GameObject CreateLoot();
+        LootPiece CreateLoot();
         GameObject CreateHud();
 
         void Cleanup();

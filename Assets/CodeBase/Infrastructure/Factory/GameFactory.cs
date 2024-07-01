@@ -7,6 +7,7 @@ using CodeBase.Logic;
 using CodeBase.StaticData;
 using CodeBase.UI;
 using System.Collections.Generic;
+using CodeBase.Data;
 using UnityEngine;
 using UnityEngine.AI;
 using Object = UnityEngine.Object;
@@ -18,17 +19,19 @@ namespace CodeBase.Infrastructure.Factory
         private readonly IAssets _assets;
         private readonly IStaticDataService _staticData;
         private readonly IRandomService _randomService;
+        private readonly IPersistentProgressService _progressService;
 
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
 
         private GameObject HeroGameObject { get; set;  }
 
-        public GameFactory(IAssets assets, IStaticDataService staticData, IRandomService random)
+        public GameFactory(IAssets assets, IStaticDataService staticData, IRandomService random, IPersistentProgressService progressService)
         {
             _assets = assets;
             _staticData = staticData;
             _randomService = random;
+            _progressService = progressService;
         }
 
         public GameObject CreateHero(GameObject at)
@@ -67,8 +70,14 @@ namespace CodeBase.Infrastructure.Factory
             return monster;
         }
 
-        public GameObject CreateLoot() =>
-            InstantiateRegistered(AssetPath.Loot);
+        public LootPiece CreateLoot()
+        {
+             var lootPiece = InstantiateRegistered(AssetPath.Loot).GetComponent<LootPiece>();
+
+             lootPiece.Construct(_progressService.Progress.WorldData);
+
+             return lootPiece;
+        }
 
         public void Cleanup()
         {
