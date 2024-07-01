@@ -23,10 +23,10 @@ namespace CodeBase.UI
                 Construct(health);
         }
 
-        private void OnDestroy() => 
+        private void OnDestroy() =>
             _health.HealthChanged -= UpdateHpBar;
 
-        public void UpdateHpBar() => 
+        public void UpdateHpBar() =>
             HpBar.SetValue(_health.Current, _health.Max);
     }
 }

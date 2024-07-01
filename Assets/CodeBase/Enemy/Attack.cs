@@ -21,7 +21,7 @@ namespace CodeBase.Enemy
         private Collider[] _hits = new Collider[1];
         private bool _attackIsActive;
 
-        public void Construct(Transform heroTransform) => 
+        public void Construct(Transform heroTransform) =>
             _heroTransform = heroTransform;
 
         private void Awake()
@@ -35,7 +35,7 @@ namespace CodeBase.Enemy
 
             if (CanAttack())
                 StartAttack();
-        }        
+        }
 
         private void OnAttack()
         {
@@ -46,10 +46,10 @@ namespace CodeBase.Enemy
             }
         }
 
-        public void EnableAttack() => 
+        public void EnableAttack() =>
             _attackIsActive = true;
 
-        public void DisableAttack() => 
+        public void DisableAttack() =>
             _attackIsActive = false;
 
         private bool Hit(out Collider hit)
@@ -59,8 +59,8 @@ namespace CodeBase.Enemy
             return hitsCount > 0;
         }
 
-        private Vector3 StartPoint() => 
-            new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z) + 
+        private Vector3 StartPoint() =>
+            new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z) +
                 transform.forward * EffectiveDistance;
 
         private void OnAttackEnded()

@@ -9,10 +9,10 @@ namespace CodeBase.Enemy
 
         private Transform _heroTransform;
 
-        public void Construct(Transform heroTransform) => 
+        public void Construct(Transform heroTransform) =>
             _heroTransform = heroTransform;
 
-        private void Update() => 
+        private void Update() =>
             SetDestinationForAgent();
 
         private void SetDestinationForAgent()

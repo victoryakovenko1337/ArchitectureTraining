@@ -40,14 +40,14 @@ namespace CodeBase.Hero
             PhysicsDebug.DrawDebug(StartPoint() + transform.forward, _stats.DamageRadius, 1.0f);
             for (int i = 0; i < Hit(); i++)
             {
-                _hits[i].transform.parent.GetComponent<IHealth>().TakeDamage(_stats.Damage); 
+                _hits[i].transform.parent.GetComponent<IHealth>().TakeDamage(_stats.Damage);
             }
         }
 
-        public void LoadProgress(PlayerProgress progress) => 
+        public void LoadProgress(PlayerProgress progress) =>
             _stats = progress.HeroStats;
 
-        private int Hit() => 
+        private int Hit() =>
             Physics.OverlapSphereNonAlloc(StartPoint() + transform.forward, _stats.DamageRadius, _hits, _layerMask);
 
         private Vector3 StartPoint() =>

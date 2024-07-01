@@ -21,7 +21,7 @@ namespace CodeBase.Enemy
                 Animator.StopMoving();
         }
 
-        private bool ShouldMove() => 
+        private bool ShouldMove() =>
             Agent.velocity.magnitude > MinimalVelocity && Agent.remainingDistance > Agent.radius;
     }
 }

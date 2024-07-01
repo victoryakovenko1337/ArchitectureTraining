@@ -101,7 +101,7 @@ namespace CodeBase.Infrastructure.Factory
         private void RegisterProgressWatchers(GameObject gameObject)
         {
             foreach (ISavedProgressReader progressReader in gameObject.GetComponentsInChildren<ISavedProgressReader>())
-                Register(progressReader);            
+                Register(progressReader);
         }
     }
 }

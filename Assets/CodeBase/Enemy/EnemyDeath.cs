@@ -8,7 +8,7 @@ namespace CodeBase.Enemy
     public class EnemyDeath : MonoBehaviour
     {
         public event Action Happened;
-        
+
         public EnemyHealth Health;
         public EnemyAnimator Animator;
 

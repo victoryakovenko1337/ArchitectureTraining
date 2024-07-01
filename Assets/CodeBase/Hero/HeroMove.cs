@@ -32,14 +32,14 @@ namespace CodeBase.Hero
             }
         }
 
-        private void Awake() 
+        private void Awake()
         {
             _inputService = AllServices.Container.Single<IInputService>();
-            
+
             _characterController = GetComponent<CharacterController>();
         }
 
-        private void Update() 
+        private void Update()
         {
             Vector3 movementVector = Vector3.zero;
 

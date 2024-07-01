@@ -154,7 +154,7 @@ namespace CartoonFX
 										}
 										catch { }
 									}
-									
+
 									AddGUICommand(propertyCount, new GC_HelpBox()
 									{
 										message = message,

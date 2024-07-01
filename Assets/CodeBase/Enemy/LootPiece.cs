@@ -19,14 +19,14 @@ namespace CodeBase.Enemy
             _loot = loot;
         }
 
-        private void OnTriggerEnter(Collider other) => 
+        private void OnTriggerEnter(Collider other) =>
             Pickup();
 
         private void Pickup()
         {
-            if (_picked) 
+            if (_picked)
                 return;
-            
+
             _picked = true;
 
             _worldData.LootData.Collect(_loot);

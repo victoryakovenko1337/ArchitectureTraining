@@ -31,16 +31,16 @@ namespace CodeBase.Enemy
             _positionToLook = new Vector3(positionDifference.x, transform.position.y, positionDifference.z);
         }
 
-        private Quaternion SmoothedRotation(Quaternion rotation, Vector3 positionToLook) => 
+        private Quaternion SmoothedRotation(Quaternion rotation, Vector3 positionToLook) =>
             Quaternion.Lerp(rotation, TargetRotation(positionToLook), SpeedFactor());
 
-        private Quaternion TargetRotation(Vector3 positionToLook) => 
+        private Quaternion TargetRotation(Vector3 positionToLook) =>
             Quaternion.LookRotation(positionToLook);
 
-        private float SpeedFactor() => 
+        private float SpeedFactor() =>
             _speed * Time.deltaTime;
 
-        private bool Initialized() => 
+        private bool Initialized() =>
             _heroTransform != null;
     }
 }

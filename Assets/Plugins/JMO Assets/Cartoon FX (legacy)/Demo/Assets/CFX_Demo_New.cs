@@ -31,11 +31,11 @@ public class CFX_Demo_New : MonoBehaviour
 	private bool slowMo;
 	private Vector3 defaultCamPosition;
 	private Quaternion defaultCamRotation;
-	
+
 	private List<GameObject> onScreenParticles = new List<GameObject>();
-	
+
 	//-------------------------------------------------------------
-	
+
 	void Awake()
 	{
 		List<GameObject> particleExampleList = new List<GameObject>();
@@ -47,15 +47,15 @@ public class CFX_Demo_New : MonoBehaviour
 		}
 		particleExampleList.Sort( delegate(GameObject o1, GameObject o2) { return o1.name.CompareTo(o2.name); } );
 		ParticleExamples = particleExampleList.ToArray();
-		
+
 		defaultCamPosition = Camera.main.transform.position;
 		defaultCamRotation = Camera.main.transform.rotation;
-		
+
 		StartCoroutine("CheckForDeletedParticles");
-		
+
 		UpdateUI();
 	}
-	
+
 	void Update()
 	{
 		if(Input.GetKeyDown(KeyCode.LeftArrow))
@@ -70,7 +70,7 @@ public class CFX_Demo_New : MonoBehaviour
 		{
 			destroyParticles();
 		}
-		
+
 		if(Input.GetMouseButtonDown(0))
 		{
 			RaycastHit hit = new RaycastHit();
@@ -80,13 +80,13 @@ public class CFX_Demo_New : MonoBehaviour
 				particle.transform.position = hit.point + particle.transform.position;
 			}
 		}
-		
+
 		float scroll = Input.GetAxis("Mouse ScrollWheel");
 		if(scroll != 0f)
 		{
 			Camera.main.transform.Translate(Vector3.forward * (scroll < 0f ? -1f : 1f), Space.Self);
 		}
-		
+
 		if(Input.GetMouseButtonDown(2))
 		{
 			Camera.main.transform.position = defaultCamPosition;
@@ -114,7 +114,7 @@ public class CFX_Demo_New : MonoBehaviour
 		camRotBtn.color = c;
 		camRotLabel.color = c;
 	}
-	
+
 	public void OnToggleSlowMo()
 	{
 		var c = Color.white;
@@ -144,19 +144,19 @@ public class CFX_Demo_New : MonoBehaviour
 	{
 		nextParticle();
 	}
-	
+
 	//-------------------------------------------------------------
 	// UI
-	
+
 	private void UpdateUI()
 	{
 		EffectLabel.text = ParticleExamples[exampleIndex].name;
 		EffectIndexLabel.text = string.Format("{0}/{1}", (exampleIndex+1).ToString("00"), ParticleExamples.Length.ToString("00"));
 	}
-	
+
 	//-------------------------------------------------------------
 	// SYSTEM
-	
+
 	private GameObject spawnParticle()
 	{
 		GameObject particles = (GameObject)Instantiate(ParticleExamples[exampleIndex]);
@@ -168,7 +168,7 @@ public class CFX_Demo_New : MonoBehaviour
 //			for(int i = 0; i < particles.transform.childCount; i++)
 //				particles.transform.GetChild(i).gameObject.SetActive(true);
 		#endif
-		
+
 		ParticleSystem ps = particles.GetComponent<ParticleSystem>();
 
 #if UNITY_5_5_OR_NEWER
@@ -190,10 +190,10 @@ public class CFX_Demo_New : MonoBehaviour
 #endif
 
 		onScreenParticles.Add(particles);
-		
+
 		return particles;
 	}
-	
+
 	IEnumerator CheckForDeletedParticles()
 	{
 		while(true)
@@ -208,22 +208,22 @@ public class CFX_Demo_New : MonoBehaviour
 			}
 		}
 	}
-	
+
 	private void prevParticle()
 	{
 		exampleIndex--;
 		if(exampleIndex < 0) exampleIndex = ParticleExamples.Length - 1;
-		
+
 		UpdateUI();
 	}
 	private void nextParticle()
 	{
 		exampleIndex++;
 		if(exampleIndex >= ParticleExamples.Length) exampleIndex = 0;
-		
+
 		UpdateUI();
 	}
-	
+
 	private void destroyParticles()
 	{
 		for(int i = onScreenParticles.Count - 1; i >= 0; i--)
@@ -232,7 +232,7 @@ public class CFX_Demo_New : MonoBehaviour
 			{
 				GameObject.Destroy(onScreenParticles[i]);
 			}
-			
+
 			onScreenParticles.RemoveAt(i);
 		}
 	}

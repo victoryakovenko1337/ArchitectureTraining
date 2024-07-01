@@ -22,7 +22,7 @@ namespace CodeBase.Infrastructure.States
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _services = services;
-            
+
             RegisterServices();
         }
 
@@ -33,14 +33,14 @@ namespace CodeBase.Infrastructure.States
 
         public void Exit()
         {
-            
+
         }
 
         private void EnterLoadLevel() => _stateMachine.Enter<LoadProgressState>();
 
         private void RegisterServices()
         {
-            RegisterStaticData(); 
+            RegisterStaticData();
 
             _services.RegisterSingle<IInputService>(InputService());
             _services.RegisterSingle<IRandomService>(new RandomService());

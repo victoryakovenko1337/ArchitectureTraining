@@ -7,7 +7,7 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private float _distance;
     [SerializeField] private float _offsetY;
 
-    private void LateUpdate() 
+    private void LateUpdate()
     {
         if (_followingObject == null)
             return;

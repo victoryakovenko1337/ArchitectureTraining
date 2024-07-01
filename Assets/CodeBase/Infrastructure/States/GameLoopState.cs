@@ -8,7 +8,7 @@ namespace CodeBase.Infrastructure.States
 
         public void Enter()
         {
-            
+
         }
 
         public void Exit()

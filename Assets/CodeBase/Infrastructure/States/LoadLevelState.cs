@@ -60,7 +60,7 @@ namespace CodeBase.Infrastructure.States
             InitSpawners();
 
             GameObject hero = _gameFactory.CreateHero(at: GameObject.FindWithTag(InitialPoint));
-            
+
             InitHud(hero);
             CameraFollow(hero);
         }

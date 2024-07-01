@@ -10,12 +10,12 @@ namespace CodeBase.Infrastructure
 
         private Game _game;
 
-        private void Awake() 
+        private void Awake()
         {
             _game = new Game(this, Instantiate(CurtainPrefab));
             _game.StateMachine.Enter<BootstrapState>();
 
-            DontDestroyOnLoad(this); 
+            DontDestroyOnLoad(this);
         }
     }
 }

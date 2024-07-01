@@ -11,7 +11,7 @@ namespace CodeBase.Logic
     public class EnemySpawner : MonoBehaviour, ISavedProgress
     {
         public MonsterTypeId MonsterTypeId;
-        public bool Slain => _slain; 
+        public bool Slain => _slain;
 
         [SerializeField] private bool _slain;
         private string _id;
@@ -41,7 +41,7 @@ namespace CodeBase.Logic
 
         private void Slay()
         {
-            if (_enemyDeath != null) 
+            if (_enemyDeath != null)
                 _enemyDeath.Happened -= Slay;
 
             _slain = true;
