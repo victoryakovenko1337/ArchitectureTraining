@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6555523833837141954}
   - component: {fileID: 98550095378718463}
+  - component: {fileID: 3024917324921967939}
   m_Layer: 5
   m_Name: Shop
   m_TagString: Untagged
@@ -46,6 +47,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 852967234022659411}
   m_CullTransparentMesh: 0
+--- !u!114 &3024917324921967939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852967234022659411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80bf08d6639b448aa20af789bcd7ed45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CloseButton: {fileID: 4815610311753330787}
 --- !u!1 &1291174595101426055
 GameObject:
   m_ObjectHideFlags: 0
@@ -2075,6 +2089,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 797519894759638885, guid: b4ce6ef13de88064ab577752bfbc2304, type: 3}
   m_PrefabInstance: {fileID: 2875899347107578071}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4815610311753330787 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7295060812281147572, guid: b4ce6ef13de88064ab577752bfbc2304, type: 3}
+  m_PrefabInstance: {fileID: 2875899347107578071}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4280321708869846173
 PrefabInstance:
   m_ObjectHideFlags: 0
