@@ -1,12 +1,11 @@
 using CodeBase.Enemy;
 using CodeBase.Infrastructure.AssetManagment;
-using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.Randomizer;
 using CodeBase.Logic;
 using CodeBase.StaticData;
-using CodeBase.UI;
 using System.Collections.Generic;
+using CodeBase.Infrastructure.Services.StaticData;
 using CodeBase.Logic.EnemySpawners;
 using CodeBase.UI.Elements;
 using UnityEngine;
