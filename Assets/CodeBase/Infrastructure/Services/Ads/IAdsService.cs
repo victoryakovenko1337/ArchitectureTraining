@@ -8,7 +8,6 @@ namespace CodeBase.Infrastructure.Services.Ads
         bool IsRewardedVideoReady { get; }
         int Reward { get; }
         void Initialize();
-        void LoadRewardedVideo();
         void ShowRewardedVideo(Action onVideoFinished);
     }
 }
