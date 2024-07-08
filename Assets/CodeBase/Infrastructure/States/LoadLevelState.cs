@@ -13,8 +13,6 @@ namespace CodeBase.Infrastructure.States
 {
     public class LoadLevelState : IPayloadedState<string>
     {
-        private const string InitialPoint = "PlayerInitialPoint";
-        private const string EnemySpawnerTag = "EnemySpawner";
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly LoadingCurtain _curtain;
@@ -47,10 +45,8 @@ namespace CodeBase.Infrastructure.States
             _sceneLoader.Load(sceneName, OnLoaded);
         }
 
-        public void Exit()
-        {
+        public void Exit() =>
             _curtain.Hide();
-        }
 
         private void OnLoaded()
         {
@@ -59,11 +55,6 @@ namespace CodeBase.Infrastructure.States
             InformProgressReaders();
 
             _stateMachine.Enter<GameLoopState>();
-        }
-
-        private void InitUIRoot()
-        {
-            _uiFactory.CreateUIRoot();
         }
 
         private void InformProgressReaders()
@@ -76,23 +67,17 @@ namespace CodeBase.Infrastructure.States
 
         private void InitGameWorld()
         {
-            InitSpawners();
-
-            GameObject hero = _gameFactory.CreateHero(at: GameObject.FindWithTag(InitialPoint));
-
+            LevelStaticData levelData = LevelStaticData();
+            InitSpawners(levelData);
+            GameObject hero = InitHero(levelData);
             InitHud(hero);
             CameraFollow(hero);
         }
 
-        private void InitSpawners()
+        private void InitSpawners(LevelStaticData levelData)
         {
-            string sceneKey = SceneManager.GetActiveScene().name;
-            LevelStaticData levelData = _staticData.ForLevel(sceneKey);
-
             foreach (EnemySpawnerData spawnerData in levelData.EnemySpawners)
-            {
                 _gameFactory.CreateSpawner(spawnerData.Position, spawnerData.Id, spawnerData.MonsterTypeId);
-            }
         }
 
         private void InitHud(GameObject hero)
@@ -103,9 +88,16 @@ namespace CodeBase.Infrastructure.States
                 .Construct(hero.GetComponent<HeroHealth>());
         }
 
-        private static void CameraFollow(GameObject hero)
-        {
+        private void InitUIRoot() =>
+            _uiFactory.CreateUIRoot();
+
+        private GameObject InitHero(LevelStaticData levelData) =>
+            _gameFactory.CreateHero(levelData.InitialPointPosition);
+
+        private static void CameraFollow(GameObject hero) =>
             Camera.main.GetComponent<CameraFollow>().Follow(hero);
-        }
+
+        private LevelStaticData LevelStaticData() =>
+            _staticData.ForLevel(SceneManager.GetActiveScene().name);
     }
 }
