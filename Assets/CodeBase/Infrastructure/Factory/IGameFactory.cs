@@ -2,6 +2,7 @@ using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.StaticData;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using CodeBase.Enemy;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace CodeBase.Infrastructure.Factory
         List<ISavedProgressReader> ProgressReaders { get; }
         List<ISavedProgress> ProgressWriters { get; }
 
-        GameObject CreateMonster(MonsterTypeId monsterTypeId, Transform parent);
+        Task<GameObject> CreateMonster(MonsterTypeId monsterTypeId, Transform parent);
         GameObject CreateHero(Vector3 at);
         GameObject CreateHud();
         LootPiece CreateLoot();
