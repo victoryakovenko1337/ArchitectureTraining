@@ -8,7 +8,7 @@ namespace CodeBase.Infrastructure
 
         private void Awake()
         {
-            var bootstraper = FindObjectOfType<GameBootstrapper>();
+            GameBootstrapper bootstraper = FindObjectOfType<GameBootstrapper>();
 
             if(bootstraper == null)
             {

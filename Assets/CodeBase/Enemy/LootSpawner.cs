@@ -35,7 +35,7 @@ namespace CodeBase.Enemy
             LootPiece loot = _factory.CreateLoot();
             loot.transform.position = transform.position;
 
-            var lootItem = GenerateLoot();
+            Loot lootItem = GenerateLoot();
             loot.Initialize(lootItem);
         }
 

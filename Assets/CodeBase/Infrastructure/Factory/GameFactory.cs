@@ -51,7 +51,7 @@ namespace CodeBase.Infrastructure.Factory
             hud.GetComponent<LootUI>()
                 .LootCounter.Construct(_progressService.Progress.WorldData);
 
-            foreach (var openWindowButton in hud.GetComponent<LootUI>().OpenWindowButtons)
+            foreach (OpenWindowButton openWindowButton in hud.GetComponent<LootUI>().OpenWindowButtons)
                 openWindowButton.Construct(_windowService);
 
             return hud;
@@ -79,7 +79,7 @@ namespace CodeBase.Infrastructure.Factory
             lootSpawner.SetLoot(monsterData.MinLoot, monsterData.MaxLoot);
             lootSpawner.Construct(this, _randomService);
 
-            var attack = monster.GetComponent<Attack>();
+            Attack attack = monster.GetComponent<Attack>();
             attack.Construct(HeroGameObject.transform);
             attack.Damage = monsterData.Damage;
             attack.Cleavage = monsterData.Cleavage;
@@ -92,7 +92,7 @@ namespace CodeBase.Infrastructure.Factory
 
         public LootPiece CreateLoot()
         {
-             var lootPiece = InstantiateRegistered(AssetPath.Loot).GetComponent<LootPiece>();
+             LootPiece lootPiece = InstantiateRegistered(AssetPath.Loot).GetComponent<LootPiece>();
 
              lootPiece.Construct(_progressService.Progress.WorldData);
 

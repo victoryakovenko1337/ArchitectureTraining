@@ -8,7 +8,7 @@ namespace CodeBase.Infrastructure.Services.Inputs
         {
             get
             {
-                var axis = SimpleInputAxis();
+                Vector2 axis = SimpleInputAxis();
 
                 if (axis == Vector2.zero)
                 {

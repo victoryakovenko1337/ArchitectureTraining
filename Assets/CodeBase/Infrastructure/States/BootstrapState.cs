@@ -73,7 +73,7 @@ namespace CodeBase.Infrastructure.States
 
         private void RegisterAdsService()
         {
-            var adService = new AdsService();
+            AdsService adService = new AdsService();
             adService.Initialize();
             _services.RegisterSingle<IAdsService>(adService);
         }

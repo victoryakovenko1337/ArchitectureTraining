@@ -43,10 +43,10 @@ namespace CodeBase.UI.Windows.Shop
         {
             bool videoReady = _adsService.IsRewardedVideoReady;
 
-            foreach (var adActiveObject in AdActiveObjects)
+            foreach (GameObject adActiveObject in AdActiveObjects)
                 adActiveObject.SetActive(videoReady);
 
-            foreach (var adInactiveObject in AdInactiveObjects)
+            foreach (GameObject adInactiveObject in AdInactiveObjects)
                 adInactiveObject.SetActive(!videoReady);
         }
     }
