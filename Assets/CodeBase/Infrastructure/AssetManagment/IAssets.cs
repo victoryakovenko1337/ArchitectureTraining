@@ -1,11 +1,15 @@
+using System.Threading.Tasks;
 using CodeBase.Infrastructure.Services;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace CodeBase.Infrastructure.AssetManagment
 {
     public interface IAssets : IService
     {
-        public GameObject Instantiate(string path);
-        public GameObject Instantiate(string path, Vector3 at);
+        GameObject Instantiate(string path);
+        GameObject Instantiate(string path, Vector3 at);
+        Task<T> Load<T>(AssetReference assetReference) where T : class;
+        void CleanUp();
     }
 }

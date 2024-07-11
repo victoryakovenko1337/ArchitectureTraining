@@ -61,9 +61,7 @@ namespace CodeBase.Infrastructure.Factory
         {
             MonsterStaticData monsterData = _staticData.ForMonster(typeId);
 
-            GameObject prefab = await monsterData.PrefabReference
-                .LoadAssetAsync()
-                .Task;
+            GameObject prefab = await _assets.Load<GameObject>(monsterData.PrefabReference);
 
             GameObject monster = Object.Instantiate(prefab, parent.position, Quaternion.identity, parent);
 
@@ -113,6 +111,8 @@ namespace CodeBase.Infrastructure.Factory
         {
             ProgressReaders.Clear();
             ProgressWriters.Clear();
+
+            _assets.CleanUp();
         }
 
         public void Register(ISavedProgressReader progressReader)
