@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b76ec2530d5fc143b29021eb177d974, type: 3}
   m_Name: FatDragon
   m_EditorClassIdentifier: 
-  MonsterTypeId: 0
-  Hp: 0
-  Damage: 0
-  MinLoot: 0
-  MaxLoot: 0
+  MonsterTypeId: 100
+  Hp: 100
+  Damage: 20
+  MinLoot: 20
+  MaxLoot: 40
   MoveSpeed: 5
-  EffectiveDistance: 0
-  Cleavage: 0
-  Prefab: {fileID: 0}
+  EffectiveDistance: 1
+  Cleavage: 0.7
+  Prefab: {fileID: 4490580572635992603, guid: c09d884e7ca40460f91e5b20675d3e94, type: 3}

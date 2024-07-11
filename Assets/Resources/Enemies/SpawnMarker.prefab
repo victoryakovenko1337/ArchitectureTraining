@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 326059118266041386}
   - component: {fileID: 7367578507730800007}
-  - component: {fileID: 1693725899154023285}
+  - component: {fileID: 3504896166957389142}
   m_Layer: 0
   m_Name: SpawnMarker
   m_TagString: Untagged
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MonsterTypeId: 0
---- !u!114 &1693725899154023285
+--- !u!114 &3504896166957389142
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,4 +58,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48c91d84402c9c443bbe1c0532fd85e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: SpawnMarker_e86445da-2182-4f00-9f8c-a7504bd2c7e5
+  Id: SpawnMarker_0d49db89-5536-4078-89fe-f0aafbbacc0d
