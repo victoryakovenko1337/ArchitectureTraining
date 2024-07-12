@@ -11,21 +11,28 @@ namespace CodeBase.Infrastructure.AssetManagment
         private Dictionary<string, AsyncOperationHandle> _completedCache = new Dictionary<string, AsyncOperationHandle>();
         private Dictionary<string, List<AsyncOperationHandle>> _handles = new Dictionary<string, List<AsyncOperationHandle>>();
 
+        public void Initialize() => Addressables.InitializeAsync();
+
         public async Task<T> Load<T>(AssetReference assetReference) where T : class
         {
             if (_completedCache.TryGetValue(assetReference.AssetGUID, out AsyncOperationHandle completedHandle))
                 return completedHandle.Result as T;
 
-            AsyncOperationHandle<T> handle = Addressables.LoadAssetAsync<T>(assetReference);
+            return await RunWithCacheOnComplete(
+                Addressables.LoadAssetAsync<T>(assetReference),
+                cacheKey: assetReference.AssetGUID
+            );
+        }
 
-            handle.Completed += h =>
-            {
-                _completedCache[assetReference.AssetGUID] = h;
-            };
+        public async Task<T> Load<T>(string adress) where T : class
+        {
+            if (_completedCache.TryGetValue(adress, out AsyncOperationHandle completedHandle))
+                return completedHandle.Result as T;
 
-            AddHandle(assetReference.AssetGUID, handle);
-
-            return await handle.Task;
+            return await RunWithCacheOnComplete(
+                Addressables.LoadAssetAsync<T>(adress),
+                cacheKey: adress
+            );
         }
 
         public void CleanUp()
@@ -48,6 +55,15 @@ namespace CodeBase.Infrastructure.AssetManagment
         {
             GameObject prefab = Resources.Load<GameObject>(path);
             return Object.Instantiate(prefab, at, Quaternion.identity);
+        }
+
+        private async Task<T> RunWithCacheOnComplete<T>(AsyncOperationHandle<T> handle, string cacheKey) where T : class
+        {
+            handle.Completed += completeHandle => _completedCache[cacheKey] = completeHandle;
+
+            AddHandle(cacheKey, handle);
+
+            return await handle.Task;
         }
 
         private void AddHandle<T>(string key, AsyncOperationHandle<T> handle) where T : class

@@ -38,15 +38,21 @@ namespace CodeBase.Infrastructure.Factory
             _windowService = windowService;
         }
 
+        public async Task WarmUp()
+        {
+            await _assets.Load<GameObject>(AssetAdress.Loot);
+            await _assets.Load<GameObject>(AssetAdress.Spawner);
+        }
+
         public GameObject CreateHero(Vector3 at)
         {
-            HeroGameObject = InstantiateRegistered(AssetPath.HeroPath, at);
+            HeroGameObject = InstantiateRegistered(AssetAdress.HeroPath, at);
             return HeroGameObject;
         }
 
         public GameObject CreateHud()
         {
-            GameObject hud = InstantiateRegistered(AssetPath.HudPath);
+            GameObject hud = InstantiateRegistered(AssetAdress.HudPath);
 
             hud.GetComponent<LootUI>()
                 .LootCounter.Construct(_progressService.Progress.WorldData);
@@ -88,18 +94,20 @@ namespace CodeBase.Infrastructure.Factory
             return monster;
         }
 
-        public LootPiece CreateLoot()
+        public async Task<LootPiece> CreateLoot()
         {
-             LootPiece lootPiece = InstantiateRegistered(AssetPath.Loot).GetComponent<LootPiece>();
+            GameObject prefab = await _assets.Load<GameObject>(AssetAdress.Loot);
+            LootPiece lootPiece = InstantiateRegistered(prefab).GetComponent<LootPiece>();
 
-             lootPiece.Construct(_progressService.Progress.WorldData);
+            lootPiece.Construct(_progressService.Progress.WorldData);
 
-             return lootPiece;
+            return lootPiece;
         }
 
-        public void CreateSpawner(Vector3 at, string spawnerId, MonsterTypeId monsterTypeId)
+        public async Task CreateSpawner(Vector3 at, string spawnerId, MonsterTypeId monsterTypeId)
         {
-            SpawnPoint spawner = InstantiateRegistered(AssetPath.Spawner, at)
+            GameObject prefab = await _assets.Load<GameObject>(AssetAdress.Spawner);
+            SpawnPoint spawner = InstantiateRegistered(prefab, at)
                 .GetComponent<SpawnPoint>();
 
             spawner.Construct(this);
@@ -107,7 +115,7 @@ namespace CodeBase.Infrastructure.Factory
             spawner.MonsterTypeId = monsterTypeId;
         }
 
-        public void Cleanup()
+        public void CleanUp()
         {
             ProgressReaders.Clear();
             ProgressWriters.Clear();
@@ -121,6 +129,20 @@ namespace CodeBase.Infrastructure.Factory
                 ProgressWriters.Add(progressWriter);
 
             ProgressReaders.Add(progressReader);
+        }
+
+        private GameObject InstantiateRegistered(GameObject prefab, Vector3 at)
+        {
+            GameObject gameObject = Object.Instantiate(prefab, at, Quaternion.identity);
+            RegisterProgressWatchers(gameObject);
+            return gameObject;
+        }
+
+        private GameObject InstantiateRegistered(GameObject prefab)
+        {
+            GameObject gameObject = Object.Instantiate(prefab);
+            RegisterProgressWatchers(gameObject);
+            return gameObject;
         }
 
         private GameObject InstantiateRegistered(string prefabPath, Vector3 at)
