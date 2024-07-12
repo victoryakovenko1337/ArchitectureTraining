@@ -29,4 +29,4 @@ MonoBehaviour:
   - Id: Main_0e78ac66-4f06-4e2c-b6c9-aab195542a5b
     MonsterTypeId: 100
     Position: {x: -17.376135, y: -0.0000038146973, z: -16.741898}
-  InitialPointPosition: {x: 6.5, y: 0, z: -8.5}
+  InitialPointPosition: {x: 12, y: 0, z: -16}
