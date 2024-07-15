@@ -45,17 +45,11 @@ namespace CodeBase.Infrastructure.AssetManagment
             _handles.Clear();
         }
 
-        public GameObject Instantiate(string path)
-        {
-            GameObject prefab = Resources.Load<GameObject>(path);
-            return Object.Instantiate(prefab);
-        }
+        public Task<GameObject> Instantiate(string address) =>
+            Addressables.InstantiateAsync(address).Task;
 
-        public GameObject Instantiate(string path, Vector3 at)
-        {
-            GameObject prefab = Resources.Load<GameObject>(path);
-            return Object.Instantiate(prefab, at, Quaternion.identity);
-        }
+        public Task<GameObject> Instantiate(string address, Vector3 at) =>
+            Addressables.InstantiateAsync(address, at, Quaternion.identity).Task;
 
         private async Task<T> RunWithCacheOnComplete<T>(AsyncOperationHandle<T> handle, string cacheKey) where T : class
         {

@@ -71,8 +71,8 @@ namespace CodeBase.Infrastructure.States
         {
             LevelStaticData levelData = LevelStaticData();
             await InitSpawners(levelData);
-            GameObject hero = InitHero(levelData);
-            InitHud(hero);
+            GameObject hero = await InitHero(levelData);
+            await InitHud(hero);
             CameraFollow(hero);
         }
 
@@ -82,9 +82,9 @@ namespace CodeBase.Infrastructure.States
                 await _gameFactory.CreateSpawner(spawnerData.Position, spawnerData.Id, spawnerData.MonsterTypeId);
         }
 
-        private void InitHud(GameObject hero)
+        private async Task InitHud(GameObject hero)
         {
-            GameObject hud = _gameFactory.CreateHud();
+            GameObject hud = await _gameFactory.CreateHud();
 
             hud.GetComponentInChildren<ActorUI>()
                 .Construct(hero.GetComponent<HeroHealth>());
@@ -93,8 +93,8 @@ namespace CodeBase.Infrastructure.States
         private void InitUIRoot() =>
             _uiFactory.CreateUIRoot();
 
-        private GameObject InitHero(LevelStaticData levelData) =>
-            _gameFactory.CreateHero(levelData.InitialPointPosition);
+        private async Task<GameObject> InitHero(LevelStaticData levelData) =>
+            await _gameFactory.CreateHero(levelData.InitialPointPosition);
 
         private static void CameraFollow(GameObject hero) =>
             Camera.main.GetComponent<CameraFollow>().Follow(hero);

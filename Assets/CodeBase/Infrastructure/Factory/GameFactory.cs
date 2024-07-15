@@ -44,15 +44,15 @@ namespace CodeBase.Infrastructure.Factory
             await _assets.Load<GameObject>(AssetAdress.Spawner);
         }
 
-        public GameObject CreateHero(Vector3 at)
+        public async Task<GameObject> CreateHero(Vector3 at)
         {
-            HeroGameObject = InstantiateRegistered(AssetAdress.HeroPath, at);
+            HeroGameObject = await InstantiateRegisteredAsync(AssetAdress.HeroPath, at);
             return HeroGameObject;
         }
 
-        public GameObject CreateHud()
+        public async Task<GameObject> CreateHud()
         {
-            GameObject hud = InstantiateRegistered(AssetAdress.HudPath);
+            GameObject hud = await InstantiateRegisteredAsync(AssetAdress.HudPath);
 
             hud.GetComponent<LootUI>()
                 .LootCounter.Construct(_progressService.Progress.WorldData);
@@ -145,16 +145,16 @@ namespace CodeBase.Infrastructure.Factory
             return gameObject;
         }
 
-        private GameObject InstantiateRegistered(string prefabPath, Vector3 at)
+        private async Task<GameObject> InstantiateRegisteredAsync(string prefabPath, Vector3 at)
         {
-            GameObject gameObject = _assets.Instantiate(prefabPath, at);
+            GameObject gameObject = await _assets.Instantiate(prefabPath, at);
             RegisterProgressWatchers(gameObject);
             return gameObject;
         }
 
-        private GameObject InstantiateRegistered(string prefabPath)
+        private async Task<GameObject> InstantiateRegisteredAsync(string prefabPath)
         {
-            GameObject gameObject = _assets.Instantiate(prefabPath);
+            GameObject gameObject = await _assets.Instantiate(prefabPath);
             RegisterProgressWatchers(gameObject);
             return gameObject;
         }
