@@ -34,7 +34,9 @@ namespace CodeBase.UI.Services.Factory
             window.Construct(_adService, _progressService);
         }
 
-        public void CreateUIRoot() =>
-            _uiRoot = _assets.Instantiate(UIRootPath).transform;
+        public void CreateUIRoot()
+        {
+            // _uiRoot = _assets.Instantiate(UIRootPath).transform;
+        }
     }
 }
