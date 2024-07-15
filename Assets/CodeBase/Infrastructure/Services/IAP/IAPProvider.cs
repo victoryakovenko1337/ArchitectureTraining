@@ -1,56 +1,79 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using CodeBase.Data;
 using UnityEngine;
 using UnityEngine.Purchasing;
+using UnityEngine.Purchasing.Extension;
 
 namespace CodeBase.Infrastructure.Services.IAP
 {
-    public class IAPProvider : IStoreListener
+    public class IAPProvider : IDetailedStoreListener
     {
         private const string IAPConfigsPath = "IAP/products";
 
-        private List<ProductConfig> _configs;
+        public event Action Initialized;
 
-        public void Initialize()
+        private IExtensionProvider _extensions;
+        private IStoreController _controller;
+        private IAPService _iapService;
+
+        public Dictionary<string, ProductConfig> Configs { get; private set; }
+
+        public bool IsInitialized => _controller != null && _extensions != null;
+
+        public void Initialize(IAPService iapService)
         {
+            _iapService = iapService;
+            Configs = new Dictionary<string, ProductConfig>();
             Load();
 
             ConfigurationBuilder builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
 
-            foreach (ProductConfig productConfig in _configs)
-                builder.AddProduct(productConfig.Id, productConfig.Type);
+            foreach (ProductConfig productConfig in Configs.Values)
+                builder.AddProduct(productConfig.Id, productConfig.ProductType);
 
             UnityPurchasing.Initialize(this, builder);
         }
 
-        private void Load()
-        {
-            _configs = Resources.Load<TextAsset>(IAPConfigsPath).text.ToDeserialized<ProductConfigWrapper>().Configs;
-        }
-
-        public void OnInitializeFailed(InitializationFailureReason error)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void OnInitializeFailed(InitializationFailureReason error, string message)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs purchaseEvent)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
-        {
-            throw new System.NotImplementedException();
-        }
+        public void StartPurchase(string productId) =>
+            _controller.InitiatePurchase(productId);
 
         public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
         {
-            throw new System.NotImplementedException();
+            _controller = controller;
+            _extensions = extensions;
+
+            Initialized?.Invoke();
+
+            Debug.Log("UnityPurchasing initialization success");
         }
+
+        public void OnInitializeFailed(InitializationFailureReason error) =>
+            Debug.Log($"UnityPurchasing OnInitializeFailed {error}");
+
+        public void OnInitializeFailed(InitializationFailureReason error, string message) =>
+            Debug.Log($"UnityPurchasing OnInitializeFailed {error}, message {message}");
+
+        public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs purchaseEvent)
+        {
+            Debug.Log($"UnityPurchasing ProcessPurchase success {purchaseEvent.purchasedProduct.definition.id}");
+
+            return _iapService.ProcessPurchase(purchaseEvent.purchasedProduct);
+        }
+
+        public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason) =>
+            Debug.LogError($"Product {product.definition.id} purchase failed, PurchaseFailureReason {failureReason}, transaction id {product.transactionID}");
+
+        public void OnPurchaseFailed(Product product, PurchaseFailureDescription failureDescription) =>
+            Debug.LogError($"Product {product.definition.id} purchase failed, PurchaseFailureDescription {failureDescription.reason}, transaction id {product.transactionID}");
+
+        private void Load() =>
+            Configs = Resources
+                .Load<TextAsset>(IAPConfigsPath)
+                .text
+                .ToDeserialized<ProductConfigWrapper>()
+                .Configs
+                .ToDictionary(x => x.Id, x => x);
     }
 }
