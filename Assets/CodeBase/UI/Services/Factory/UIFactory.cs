@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using CodeBase.Infrastructure.AssetManagment;
 using CodeBase.Infrastructure.Services.Ads;
 using CodeBase.Infrastructure.Services.PersistentProgress;
@@ -11,7 +12,7 @@ namespace CodeBase.UI.Services.Factory
 {
     public class UIFactory : IUIFactory
     {
-        private const string UIRootPath = "UI/UIRoot";
+        private const string UIRootPath = "UIRoot";
         private readonly IStaticDataService _staticData;
         private readonly IAssets _assets;
         private readonly IPersistentProgressService _progressService;
@@ -34,9 +35,10 @@ namespace CodeBase.UI.Services.Factory
             window.Construct(_adService, _progressService);
         }
 
-        public void CreateUIRoot()
+        public async Task CreateUIRoot()
         {
-            // _uiRoot = _assets.Instantiate(UIRootPath).transform;
+            GameObject root = await _assets.Instantiate(UIRootPath);
+            _uiRoot = root.transform;
         }
     }
 }

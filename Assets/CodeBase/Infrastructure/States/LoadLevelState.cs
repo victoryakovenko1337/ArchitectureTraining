@@ -52,7 +52,7 @@ namespace CodeBase.Infrastructure.States
 
         private async void OnLoaded()
         {
-            InitUIRoot();
+            await InitUIRoot();
             await InitGameWorld();
             InformProgressReaders();
 
@@ -90,8 +90,8 @@ namespace CodeBase.Infrastructure.States
                 .Construct(hero.GetComponent<HeroHealth>());
         }
 
-        private void InitUIRoot() =>
-            _uiFactory.CreateUIRoot();
+        private async Task InitUIRoot() =>
+            await _uiFactory.CreateUIRoot();
 
         private async Task<GameObject> InitHero(LevelStaticData levelData) =>
             await _gameFactory.CreateHero(levelData.InitialPointPosition);

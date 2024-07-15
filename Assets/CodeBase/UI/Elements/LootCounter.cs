@@ -14,21 +14,14 @@ namespace CodeBase.UI.Elements
         {
             _worldData = data;
             _worldData.LootData.Changed += UpdateCounter;
-        }
 
-        private void Start()
-        {
             UpdateCounter();
         }
 
-        private void OnDestroy()
-        {
+        private void OnDestroy() =>
             _worldData.LootData.Changed -= UpdateCounter;
-        }
 
-        private void UpdateCounter()
-        {
+        private void UpdateCounter() =>
             Counter.text = $"{_worldData.LootData.Collected}";
-        }
     }
 }
