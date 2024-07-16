@@ -19,6 +19,7 @@ namespace CodeBase.Infrastructure.Services.IAP
         private IAPService _iapService;
 
         public Dictionary<string, ProductConfig> Configs { get; private set; }
+        public Dictionary<string, Product> Products { get; private set; }
 
         public bool IsInitialized => _controller != null && _extensions != null;
 
@@ -26,6 +27,7 @@ namespace CodeBase.Infrastructure.Services.IAP
         {
             _iapService = iapService;
             Configs = new Dictionary<string, ProductConfig>();
+            Products = new Dictionary<string, Product>();
             Load();
 
             ConfigurationBuilder builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
@@ -43,6 +45,9 @@ namespace CodeBase.Infrastructure.Services.IAP
         {
             _controller = controller;
             _extensions = extensions;
+
+            foreach (Product product in _controller.products.all)
+                Products.Add(product.definition.id, product);
 
             Initialized?.Invoke();
 
