@@ -1,11 +1,11 @@
 using CodeBase.Enemy;
-using CodeBase.Infrastructure.AssetManagment;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.Randomizer;
 using CodeBase.Logic;
 using CodeBase.StaticData;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Services.StaticData;
 using CodeBase.Logic.EnemySpawners;
 using CodeBase.UI.Elements;
@@ -40,19 +40,19 @@ namespace CodeBase.Infrastructure.Factory
 
         public async Task WarmUp()
         {
-            await _assets.Load<GameObject>(AssetAdress.Loot);
-            await _assets.Load<GameObject>(AssetAdress.Spawner);
+            await _assets.Load<GameObject>(AssetAddress.Loot);
+            await _assets.Load<GameObject>(AssetAddress.Spawner);
         }
 
         public async Task<GameObject> CreateHero(Vector3 at)
         {
-            HeroGameObject = await InstantiateRegisteredAsync(AssetAdress.HeroPath, at);
+            HeroGameObject = await InstantiateRegisteredAsync(AssetAddress.HeroPath, at);
             return HeroGameObject;
         }
 
         public async Task<GameObject> CreateHud()
         {
-            GameObject hud = await InstantiateRegisteredAsync(AssetAdress.HudPath);
+            GameObject hud = await InstantiateRegisteredAsync(AssetAddress.HudPath);
 
             hud.GetComponent<LootUI>()
                 .LootCounter.Construct(_progressService.Progress.WorldData);
@@ -96,7 +96,7 @@ namespace CodeBase.Infrastructure.Factory
 
         public async Task<LootPiece> CreateLoot()
         {
-            GameObject prefab = await _assets.Load<GameObject>(AssetAdress.Loot);
+            GameObject prefab = await _assets.Load<GameObject>(AssetAddress.Loot);
             LootPiece lootPiece = InstantiateRegistered(prefab).GetComponent<LootPiece>();
 
             lootPiece.Construct(_progressService.Progress.WorldData);
@@ -106,7 +106,7 @@ namespace CodeBase.Infrastructure.Factory
 
         public async Task CreateSpawner(Vector3 at, string spawnerId, MonsterTypeId monsterTypeId)
         {
-            GameObject prefab = await _assets.Load<GameObject>(AssetAdress.Spawner);
+            GameObject prefab = await _assets.Load<GameObject>(AssetAddress.Spawner);
             SpawnPoint spawner = InstantiateRegistered(prefab, at)
                 .GetComponent<SpawnPoint>();
 

@@ -1,4 +1,4 @@
-using CodeBase.Infrastructure.AssetManagment;
+using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Services.IAP;
 using TMPro;
 using UnityEngine;

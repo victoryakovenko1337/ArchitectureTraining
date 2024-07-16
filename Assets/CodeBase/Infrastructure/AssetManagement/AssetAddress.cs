@@ -1,6 +1,6 @@
-namespace CodeBase.Infrastructure.AssetManagment
+namespace CodeBase.Infrastructure.AssetManagement
 {
-    public static class AssetAdress
+    public static class AssetAddress
     {
         public const string HeroPath = "Hero";
         public const string HudPath = "Hud";

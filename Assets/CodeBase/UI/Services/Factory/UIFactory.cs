@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using CodeBase.Infrastructure.AssetManagment;
+using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Services.Ads;
 using CodeBase.Infrastructure.Services.IAP;
 using CodeBase.Infrastructure.Services.PersistentProgress;

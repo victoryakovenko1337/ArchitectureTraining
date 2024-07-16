@@ -3,7 +3,7 @@ using CodeBase.Infrastructure.Services;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace CodeBase.Infrastructure.AssetManagment
+namespace CodeBase.Infrastructure.AssetManagement
 {
     public interface IAssets : IService
     {
