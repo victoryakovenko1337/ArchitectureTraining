@@ -51,6 +51,9 @@ namespace CodeBase.Infrastructure.AssetManagment
         public Task<GameObject> Instantiate(string address, Vector3 at) =>
             Addressables.InstantiateAsync(address, at, Quaternion.identity).Task;
 
+        public Task<GameObject> Instantiate(string address, Transform parent) =>
+            Addressables.InstantiateAsync(address, parent).Task;
+
         private async Task<T> RunWithCacheOnComplete<T>(AsyncOperationHandle<T> handle, string cacheKey) where T : class
         {
             handle.Completed += completeHandle => _completedCache[cacheKey] = completeHandle;

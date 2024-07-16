@@ -66,7 +66,7 @@ namespace CodeBase.Infrastructure.Services.IAP
                     Id = productId,
                     Config = config,
                     Product = product,
-                    AvailablePurchasesLeft = boughtIAP == null
+                    AvailablePurchasesLeft = boughtIAP != null
                         ? config.MaxPurchaseCount - boughtIAP.Count
                         : config.MaxPurchaseCount,
                 };
