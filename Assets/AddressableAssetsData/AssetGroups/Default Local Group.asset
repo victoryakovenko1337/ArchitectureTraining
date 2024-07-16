@@ -57,6 +57,31 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d28fdaf25607f2443b6ead389a9fc768
+    m_Address: ShopItem
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c6c531e9c23db0e40b2eba0a8f947629
+    m_Address: IAP_icon_6
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 05ae5b27f62190b4da657741df56fafd
+    m_Address: IAP_icon_7
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cb93653465f6bc64f938a8231850ae83
+    m_Address: IAP_icon_8
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8a38e0c362c83a047983d02b417b0980
+    m_Address: IAP_icon_18
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 0edaee1102338f646a0905825f3d0658, type: 2}
   m_SchemaSet:
